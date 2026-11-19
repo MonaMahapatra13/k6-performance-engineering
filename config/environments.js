@@ -1,4 +1,7 @@
 const environments = {
+  local: {
+    baseUrl: 'http://127.0.0.1:3000',
+  },
   dev: {
     baseUrl: 'https://test-api.k6.io',
   },
