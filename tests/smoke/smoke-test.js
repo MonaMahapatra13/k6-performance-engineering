@@ -1,5 +1,8 @@
 import http from "k6/http";
 import { check, sleep } from "k6";
+import { getEnvironment } from "../../config/environments.js";
+
+const environment = getEnvironment();
 
 export const options = {
   vus: 1,
@@ -13,7 +16,7 @@ export const options = {
 };
 
 export default function () {
-  const response = http.get("https://test-api.k6.io/public/crocodiles/");
+  const response = http.get(`${environment.baseUrl}/public/crocodiles/`);
 
   check(response, {
     "status is 200": (res) => res.status === 200,
