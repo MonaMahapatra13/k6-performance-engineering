@@ -1,12 +1,13 @@
 import http from "k6/http";
 import { check, sleep } from "k6";
 import { getEnvironment } from "../../config/environments.js";
+import { getWorkloadProfile } from "../../config/workload-profiles.js";
 
 const environment = getEnvironment();
+const workload = getWorkloadProfile("smoke");
 
 export const options = {
-  vus: 1,
-  duration: "30s",
+  ...workload,
 
   thresholds: {
     http_req_failed: ["rate<0.01"],
